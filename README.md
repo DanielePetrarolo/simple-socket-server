@@ -51,7 +51,7 @@ Elenco delle missioni interpretate dal server e relativa documentazione a riguar
 | define_connection_1t1 | - | {mission: "define_connection_1t1"} |
 | define_connection_1tM | - | {mission: "define_connection_1tM"} |
 | ask_for_connection | to: string = ID del client leader | {mission: "ask_for_connection", to: ID_LEADER} |
-| send_message | to: string = ID del client destinatario data: any = Qualsiasi cosa gestibile da un altro client | {mission: "send_message", to: ID_CLIENT, data: DATA} |
+| send_message | to: string = ID del client destinatario<br>data: any = Qualsiasi cosa gestibile da un altro client | {mission: "send_message", to: ID_CLIENT, data: DATA} |
 | ping | - | {mission: "ping"} |
 
 ## Lista Azioni
@@ -59,6 +59,6 @@ Quando il server riceve delle missioni, in alcune situazioni invia un messaggio 
 | Nome missione | Azione eseguita | Parametri |
 |---|---|---|
 | OPEN CONNECTION | Invio di un azione di tipo "signin_complete" verso il client appena connesso | id: string = ID assegnato al client |
-| "ask_for_connection" | Invio di un azione di tipo "alert_connection_update" verso tutti i client di un gruppo di connessione | yourID: string = ID del client, connection: Object = info sul gruppo di connessione |
+| "ask_for_connection" | Invio di un azione di tipo "alert_connection_update" verso tutti i client di un gruppo di connessione | yourID: string = ID del client<br>connection: Object = info sul gruppo di connessione |
 | "send_message" | Inoltro dell'oggetto data verso il client destinatario. L'action è stabilita dal client mittente e dunque il server inoltra semplicemente il messaggio | - |
 | "ping" | Invio di un azione di tipo "pong" verso il client che ha inviato la missione | - |
