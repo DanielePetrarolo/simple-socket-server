@@ -23,9 +23,12 @@ let connections = [];
  *  - Listener "close": listener che ascolta quando l'elemento di disconnette dal SocketServer
  * 
  */
-sockserver.on('connection', ws => {
+sockserver.on('connection', (ws, req) => {
 
-    let id  = _makeID(4);
+    let params = new URLSearchParams(req.url.replace('/', '').replace('?', ''));
+    let id = params.get('id');
+    id = checkID(id);
+
     ws.id   = id;
     ws.send(JSON.stringify({ action: 'signin_complete', id: id }));
 
@@ -58,6 +61,26 @@ sockserver.on('connection', ws => {
 // Log delle connessioni
 setInterval(function(){ console.log(connections); }, 5000);
 
+/**
+ * checkID
+ * Metodo che verifica se un ID richiesto è libero o occupato.
+ * Il return fornisce l'ID scelto: se libero è l'ID stesso, altrimenti genera un nuovo ID.
+ * @param {*} id 
+ * @returns 
+ */
+function checkID(id){
+    if(id){
+        connections.forEach(connection => {
+            if(connection.clients.includes(id)){
+                id = _makeID(5);
+                return;
+            }
+        });
+    } else {
+       id = _makeID(5);
+    }
+    return id;
+}
 
 /**
  * defineConnection_1t1

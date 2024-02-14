@@ -9,15 +9,18 @@ npm install
 ## Startup
 Una volta che l'installazione dei pacchetti è ultimata, per lanciare il server usare il comando:
 ```bash
-node server.js
+npm start
 ```
 ## Idea di base
 Il funzionamento è molto basico e si basa su un paio di semplici concetti:
 
 - Il server può gestire molteplici connessioni simultaneamente, creando gruppi di connessione fra client.
 - Ogni gruppo di connessione ha un leader, ovvero il client che ha istanziato il gruppo, una tipologia (1 a 1 o 1 a molti) e un'array di client connessi tra loro (leader incluso).
-- Il linguaggio di comunicazione tra client e server è definito tramite un set ristretto di missioni, che il server interpreta al fine di svolgere operazioni. La lista di queste missioni è illustrata nella sezioni seguenti.
+- Ogni client ha un ID: è possibile richiedere da parte del client un ID specifico. Questo sarà assegnato solo se non usato da un altro client connesso al server.
+- Ogni comunicazione di un client verso il server è svolta tramite l'invio di una "missione".
+- Il linguaggio di comunicazione tra client e server è definito tramite un set ristretto di "missioni", che il server interpreta al fine di svolgere operazioni. La lista di queste missioni è illustrata nella sezioni seguenti.
 - Quando il server riceve una missione, in alcune situazioni può inoltrare un nuovo messaggio verso uno o più client: i client possono capire che tipologia di messaggio sia dalla proprietà "azione". La lista di queste azioni predefinite è illustrata nelle sezioni seguenti.
+- I client ricevono da parte del server dei messaggi, le quali definiamo come "azioni". Sarà premura del client interpretare le azioni ricevute per svolgere logiche.
 
 
 ## Esempio di funzionamento
